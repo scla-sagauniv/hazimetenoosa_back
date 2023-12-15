@@ -1,0 +1,616 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "presio"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/signUp": {
+      "post": {
+        "summary": "Create New User",
+        "description": "Create a new user.",
+        "operationId": "post-user",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateUser"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/User"
+          },
+          "400": {
+            "description": "Missing Required Information"
+          },
+          "409": {
+            "description": "Email Already Taken"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    },
+    "/signIn": {
+      "post": {
+        "summary": "",
+        "operationId": "post-signIn",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/SignIn"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    },
+    "/signOut": {
+      "post": {
+        "summary": "sign out",
+        "operationId": "post-signOut",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    },
+    "/tree": {
+      "get": {
+        "summary": "get tree",
+        "operationId": "get-tree",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tree": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      },
+      "post": {
+        "summary": "create node",
+        "operationId": "post-tree",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateNode"
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tree": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      },
+      "put": {
+        "summary": "update tree",
+        "operationId": "put-tree",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tree": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Node"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tree": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "delete nodes",
+        "operationId": "delete-tree",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tree": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    },
+    "/memo/{id}": {
+      "get": {
+        "summary": "get memo",
+        "operationId": "get-memo",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Memo"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      },
+      "put": {
+        "summary": "update memo",
+        "operationId": "put-memo-id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CreateMemo"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Memo"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    },
+    "/folder/{id}": {
+      "put": {
+        "summary": "update folder",
+        "operationId": "put-folder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/sessionId"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {},
+        "servers": [
+          {
+            "url": "http://localhost:3000"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "sessionId": {
+        "name": "sessionId",
+        "in": "cookie",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "SignUp": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "SignIn": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "CreateMemo": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "content"
+              ]
+            }
+          }
+        }
+      },
+      "CreateNode": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "isSecret": {
+                  "type": "boolean"
+                },
+                "isFolder": {
+                  "type": "boolean"
+                },
+                "parentId": {
+                  "type": "integer"
+                },
+                "content": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Memo"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Folder"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "User": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "email",
+                "password"
+              ]
+            }
+          }
+        }
+      },
+      "Memo": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Memo"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Node": {
+        "type": "object",
+        "title": "Node",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "isSecret": {
+            "type": "boolean"
+          },
+          "isFolder": {
+            "type": "boolean"
+          },
+          "parentId": {
+            "type": "integer"
+          },
+          "children": {
+            "type": "array",
+            "description": "NodeのArray",
+            "items": {
+              "type": "object"
+            }
+          },
+          "content": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Memo"
+              },
+              {
+                "$ref": "#/components/schemas/Folder"
+              }
+            ]
+          }
+        },
+        "examples": [
+          {
+            "id": 0,
+            "name": "string",
+            "isSecret": "string",
+            "isFolder": true,
+            "children": [
+              null
+            ]
+          }
+        ]
+      },
+      "Memo": {
+        "type": "object",
+        "title": "Memo",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "body",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "Folder": {
+        "type": "object",
+        "title": "Folder",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedeAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "createdAt",
+          "updatedeAt"
+        ]
+      }
+    }
+  }
+}
