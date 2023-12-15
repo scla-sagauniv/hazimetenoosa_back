@@ -13,6 +13,6 @@ COPY ./docker/db/my.cnf /etc/mysql/conf.d/my.cnf
 #   && update-locale LANG=ja_JP.UTF-8 \
 #   && apt-get clean \
 #   && rm -rf /var/lib/apt/lists/*
-ENV LC_ALL ja_JP.UTF-8
+# ENV LC_ALL ja_JP.UTF-8
 
 CMD ["mysqld"]
