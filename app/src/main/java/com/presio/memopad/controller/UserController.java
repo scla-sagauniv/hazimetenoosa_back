@@ -30,6 +30,9 @@ public class UserController {
   private UserService userService;
 
   @Autowired
+  private CookieService cookieService;
+
+  @Autowired
   private StringRedisTemplate stringRedisTemplate;
 
   ObjectMapper mapper = new ObjectMapper();
@@ -54,7 +57,7 @@ public class UserController {
     AuthSession session = new AuthSession(user.getId());
     try {
       stringRedisTemplate.opsForValue().set(session.getSessionId(), mapper.writeValueAsString(session));
-      new CookieService().setAuthSessionCookie(session, response);
+      cookieService.setAuthSessionCookie(session, response);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -74,7 +77,7 @@ public class UserController {
     AuthSession session = new AuthSession(user.getId());
     try {
       stringRedisTemplate.opsForValue().set(session.getSessionId(), mapper.writeValueAsString(session));
-      new CookieService().setAuthSessionCookie(session, response);
+      cookieService.setAuthSessionCookie(session, response);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

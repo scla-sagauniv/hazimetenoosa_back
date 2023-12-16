@@ -19,6 +19,10 @@ public class UserService {
     return userRepository.findAll();
   }
 
+  public User getUserById(int id) {
+    return userRepository.findById(id).orElseThrow();
+  }
+
   public User getUserByEmail(String email) {
     List<User> res = userRepository.findByEmail(email);
     if (res.size() == 0) {
