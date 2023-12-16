@@ -1,6 +1,6 @@
 {
   "version": "0.2.0",
-  "configurations": [
+  "configurations": [ 
     {
       "type": "java", // 言語を指定
       "name": "java (Attach)", // デバッグ実行名
