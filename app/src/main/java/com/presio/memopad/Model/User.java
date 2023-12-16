@@ -1,4 +1,4 @@
-package com.presio.memopad.Model;
+package com.presio.memopad.model;
 
 import java.security.Timestamp;
 

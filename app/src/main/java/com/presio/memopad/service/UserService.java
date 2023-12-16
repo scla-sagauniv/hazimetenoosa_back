@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.presio.memopad.Error.EmailIsAlreadyUsedException;
-import com.presio.memopad.Model.User;
-import com.presio.memopad.Repository.UserRepository;
+import com.presio.memopad.model.User;
+import com.presio.memopad.repository.UserRepository;
+import com.presio.memopad.error.EmailIsAlreadyUsedException;
 
 @Service
 public class UserService {

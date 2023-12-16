@@ -1,4 +1,4 @@
-package com.presio.memopad.Controller;
+package com.presio.memopad.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.presio.memopad.Error.EmailIsAlreadyUsedException;
-import com.presio.memopad.Error.EmailIsNotExistsException;
-import com.presio.memopad.Error.UserPasswordIsIncorrectException;
-import com.presio.memopad.Response.ErrorMessageResponse;
+import com.presio.memopad.response.ErrorMessageResponse;
+import com.presio.memopad.error.EmailIsAlreadyUsedException;
+import com.presio.memopad.error.EmailIsNotExistsException;
+import com.presio.memopad.error.UserPasswordIsIncorrectException;
 
 @RestControllerAdvice
 public class UserExceptionController extends ResponseEntityExceptionHandler {

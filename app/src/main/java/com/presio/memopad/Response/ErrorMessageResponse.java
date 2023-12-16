@@ -1,4 +1,4 @@
-package com.presio.memopad.Response;
+package com.presio.memopad.response;
 
 public record ErrorMessageResponse(String message) {
 }

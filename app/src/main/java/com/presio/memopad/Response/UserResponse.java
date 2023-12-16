@@ -1,6 +1,6 @@
-package com.presio.memopad.Response;
+package com.presio.memopad.response;
 
-import com.presio.memopad.Model.User;
+import com.presio.memopad.model.User;
 
 public record UserResponse(Integer id, String email, String password) {
   public UserResponse(User user) {

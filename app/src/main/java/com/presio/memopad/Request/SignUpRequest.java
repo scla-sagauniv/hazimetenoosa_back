@@ -1,4 +1,4 @@
-package com.presio.memopad.Request;
+package com.presio.memopad.request;
 
 import lombok.Data;
 

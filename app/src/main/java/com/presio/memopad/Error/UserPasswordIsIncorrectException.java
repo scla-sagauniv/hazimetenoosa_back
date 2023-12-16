@@ -1,4 +1,4 @@
-package com.presio.memopad.Error;
+package com.presio.memopad.error;
 
 public class UserPasswordIsIncorrectException extends RuntimeException {
   public UserPasswordIsIncorrectException(String password) {

@@ -1,4 +1,4 @@
-package com.presio.memopad.Controller;
+package com.presio.memopad.controller;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.presio.memopad.Error.UserPasswordIsIncorrectException;
-import com.presio.memopad.Model.User;
-import com.presio.memopad.Request.SignInRequest;
-import com.presio.memopad.Request.SignUpRequest;
-import com.presio.memopad.Response.UserResponse;
+import com.presio.memopad.error.UserPasswordIsIncorrectException;
+import com.presio.memopad.model.User;
+import com.presio.memopad.request.SignUpRequest;
+import com.presio.memopad.response.UserResponse;
+import com.presio.memopad.request.SignInRequest;
 import com.presio.memopad.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
