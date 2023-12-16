@@ -15,7 +15,10 @@ import com.presio.memopad.model.User;
 import com.presio.memopad.request.SignUpRequest;
 import com.presio.memopad.response.UserResponse;
 import com.presio.memopad.request.SignInRequest;
+import com.presio.memopad.service.CookieService;
 import com.presio.memopad.service.UserService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +44,7 @@ public class UserController {
   }
 
   @PostMapping("/signUp")
-  public ResponseEntity<UserResponse> signUp(@RequestBody SignUpRequest input) {
+  public ResponseEntity<UserResponse> signUp(@RequestBody SignUpRequest input, HttpServletResponse response) {
     // public User signUp(@RequestBody SignUpRequest input) {
     User user = new User();
     user.setEmail(input.getEmail());
@@ -51,6 +54,7 @@ public class UserController {
     AuthSession session = new AuthSession(user.getId());
     try {
       stringRedisTemplate.opsForValue().set(session.getSessionId(), mapper.writeValueAsString(session));
+      new CookieService().setAuthSessionCookie(session, response);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -60,7 +64,7 @@ public class UserController {
   }
 
   @PostMapping("/signIn")
-  public ResponseEntity<UserResponse> signIn(@RequestBody SignInRequest input) {
+  public ResponseEntity<UserResponse> signIn(@RequestBody SignInRequest input, HttpServletResponse response) {
     User user = userService.getUserByEmail(input.getEmail());
     if (!user.getPassword().equals(input.getPassword())) {
       throw new UserPasswordIsIncorrectException(input.getPassword());
@@ -70,6 +74,7 @@ public class UserController {
     AuthSession session = new AuthSession(user.getId());
     try {
       stringRedisTemplate.opsForValue().set(session.getSessionId(), mapper.writeValueAsString(session));
+      new CookieService().setAuthSessionCookie(session, response);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

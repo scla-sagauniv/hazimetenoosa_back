@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.presio.memopad.model.User;
 import com.presio.memopad.repository.UserRepository;
 import com.presio.memopad.error.EmailIsAlreadyUsedException;
+import com.presio.memopad.error.EmailIsNotExistsException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
   public User getUserByEmail(String email) {
     List<User> res = userRepository.findByEmail(email);
     if (res.size() == 0) {
-      throw new EmailIsAlreadyUsedException(email);
+      throw new EmailIsNotExistsException(email);
     }
     return res.get(0);
   }
