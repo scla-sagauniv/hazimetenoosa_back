@@ -48,19 +48,24 @@ services:
     build: 
       context: ./
       dockerfile: ./docker/db/Dockerfile
-    restart: unless-stopped
+    # restart: unless-stopped
+    ports:
+      - 3306:3306
     volumes:
       - ./docker/db/data:/var/lib/mysql
     environment:
       # NOTE: POSTGRES_DB/USER/PASSWORD should match values in app container
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    ports:
-      - 3306:3306
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "presio"
 
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
   
+  redis:
+    image: redis:7.0-alpine
+    ports:
+      - 6379:6379
+
   swagger-ui:
     image: swaggerapi/swagger-ui
     container_name: "presio-swagger-ui"
