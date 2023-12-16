@@ -18,6 +18,14 @@ public class UserService {
     return userRepository.findAll();
   }
 
+  public User getUserByEmail(String email) {
+    List<User> res = userRepository.findByEmail(email);
+    if (res.size() == 0) {
+      throw new EmailIsAlreadyUsedException(email);
+    }
+    return res.get(0);
+  }
+
   public User createUser(User user) {
     if (userRepository.findByEmail(user.getEmail()).size() > 0) {
       throw new EmailIsAlreadyUsedException(user.getEmail());
