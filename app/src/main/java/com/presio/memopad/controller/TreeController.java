@@ -15,7 +15,7 @@ import com.presio.memopad.service.NodeService;
 import com.presio.memopad.model.Node;
 
 @RestController
-public class NodeController {
+public class TreeController {
 
   @Autowired
   private NodeService nodeService;
