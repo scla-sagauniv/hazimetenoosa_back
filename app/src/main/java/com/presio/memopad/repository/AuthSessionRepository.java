@@ -1,8 +1,11 @@
 package com.presio.memopad.repository;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.presio.memopad.model.AuthSession;
 
+@Component
 public class AuthSessionRepository {
   private ObjectMapper mapper = new ObjectMapper();
 

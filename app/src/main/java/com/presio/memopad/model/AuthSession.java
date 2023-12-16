@@ -17,6 +17,9 @@ public class AuthSession {
   @JsonProperty("userId")
   private Integer userId;
 
+  public AuthSession() {
+  }
+
   public AuthSession(Integer userId) {
     this.sessionId = UUID.randomUUID().toString();
     this.userId = userId;

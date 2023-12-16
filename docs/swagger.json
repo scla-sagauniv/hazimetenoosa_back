@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/signUp": {
+    "/auth/signUp": {
       "post": {
         "summary": "Create New User",
         "description": "Create a new user.",
@@ -44,7 +44,7 @@
         ]
       }
     },
-    "/signIn": {
+    "/auth/signIn": {
       "post": {
         "summary": "",
         "operationId": "post-signIn",
@@ -67,7 +67,7 @@
         ]
       }
     },
-    "/signOut": {
+    "/auth/signOut": {
       "post": {
         "summary": "sign out",
         "operationId": "post-signOut",

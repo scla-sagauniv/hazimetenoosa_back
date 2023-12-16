@@ -21,6 +21,7 @@ import com.presio.memopad.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -29,8 +30,7 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @Autowired
-  private CookieService cookieService;
+  CookieService cookieService = new CookieService();
 
   @Autowired
   private StringRedisTemplate stringRedisTemplate;
@@ -38,15 +38,13 @@ public class UserController {
   ObjectMapper mapper = new ObjectMapper();
 
   @GetMapping("/user")
-  public List<UserResponse> getUsers() {
-    // public List<User> getUsers() {
+  public List<UserResponse> getUsers(@RequestAttribute("user") User loginedUser) {
     List<User> users = userService.getAllUser();
     List<UserResponse> res = users.stream().map(user -> new UserResponse(user)).toList();
     return res;
-    // return users;
   }
 
-  @PostMapping("/signUp")
+  @PostMapping("/auth/signUp")
   public ResponseEntity<UserResponse> signUp(@RequestBody SignUpRequest input, HttpServletResponse response) {
     // public User signUp(@RequestBody SignUpRequest input) {
     User user = new User();
@@ -66,7 +64,7 @@ public class UserController {
     // User res = userService.createUser(user);
   }
 
-  @PostMapping("/signIn")
+  @PostMapping("/auth/signIn")
   public ResponseEntity<UserResponse> signIn(@RequestBody SignInRequest input, HttpServletResponse response) {
     User user = userService.getUserByEmail(input.getEmail());
     if (!user.getPassword().equals(input.getPassword())) {
