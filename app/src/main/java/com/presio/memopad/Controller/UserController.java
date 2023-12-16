@@ -3,8 +3,8 @@ package com.presio.memopad.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.presio.memopad.Model.User;
@@ -22,24 +22,23 @@ public class UserController {
   private UserService userService;
 
   @GetMapping("/user")
-  // public List<UserResponse> getUsers() {
-  public List<User> getUsers() {
+  public List<UserResponse> getUsers() {
+    // public List<User> getUsers() {
     List<User> users = userService.getAllUser();
-    // List<UserResponse> res = users.stream().map(user -> new
-    // UserResponse(user)).toList();
-    // return res;
-    return users;
+    List<UserResponse> res = users.stream().map(user -> new UserResponse(user)).toList();
+    return res;
+    // return users;
   }
 
   @PostMapping("/signUp")
-  // public UserResponse signUp(@RequestBody SignUpRequest input) {
-  public User signUp(@RequestBody SignUpRequest input) {
+  public ResponseEntity<UserResponse> signUp(@RequestBody SignUpRequest input) {
+    // public User signUp(@RequestBody SignUpRequest input) {
     User user = new User();
     user.setEmail(input.getEmail());
     user.setPassword(input.getPassword());
-    // UserResponse res = new UserResponse(userService.createUser(user));
-    User res = userService.createUser(user);
-    return res;
+    UserResponse res = new UserResponse(userService.createUser(user));
+    return ResponseEntity.ok(res);
+    // User res = userService.createUser(user);
   }
 
 }

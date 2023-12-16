@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.presio.memopad.Error.EmailIsAlreadyUsedException;
 import com.presio.memopad.Model.User;
 import com.presio.memopad.Repository.UserRepository;
 
@@ -19,7 +20,7 @@ public class UserService {
 
   public User createUser(User user) {
     if (userRepository.findByEmail(user.getEmail()).size() > 0) {
-      throw new RuntimeException("This email user already exists");
+      throw new EmailIsAlreadyUsedException(user.getEmail());
     }
     return userRepository.save(user);
   }
