@@ -9,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.presio.memopad.Error.EmailIsAlreadyUsedException;
+import com.presio.memopad.Response.ErrorMessageResponse;
 
 @RestControllerAdvice
 public class UserExceptionController extends ResponseEntityExceptionHandler {
@@ -18,7 +19,7 @@ public class UserExceptionController extends ResponseEntityExceptionHandler {
     HttpHeaders headers = new HttpHeaders();
 
     return super.handleExceptionInternal(exception,
-        exception.getMessage(),
+        new ErrorMessageResponse(exception.getMessage()),
         headers,
         HttpStatus.BAD_REQUEST,
         request);
