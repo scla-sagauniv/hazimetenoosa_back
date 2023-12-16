@@ -72,6 +72,6 @@ services:
     ports:
       - 8002:8080
     volumes:
-      - ./docks/swagger.json:/openapi.json
+      - ./docs/swagger.json:/openapi.json
     environment:
       SWAGGER_JSON: /openapi.json

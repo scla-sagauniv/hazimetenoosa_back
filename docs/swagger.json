@@ -6,7 +6,11 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://localhost:5001/api/"
+    },
+    {
+      "url": "http://localhost:8080/",
+      "description": ""
     }
   ],
   "paths": {
@@ -16,7 +20,7 @@
         "description": "Create a new user.",
         "operationId": "post-user",
         "requestBody": {
-          "$ref": "#/components/requestBodies/CreateUser"
+          "$ref": "#/components/requestBodies/SignUp"
         },
         "responses": {
           "201": {
@@ -31,7 +35,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -50,7 +58,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -71,7 +83,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -107,7 +123,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       },
@@ -144,7 +164,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       },
@@ -195,7 +219,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       },
@@ -246,7 +274,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -275,7 +307,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       },
@@ -305,7 +341,11 @@
         },
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -344,7 +384,11 @@
         "responses": {},
         "servers": [
           {
-            "url": "http://localhost:3000"
+            "url": "https://localhost:5001/api/"
+          },
+          {
+            "url": "http://localhost:8080/",
+            "description": ""
           }
         ]
       }
@@ -532,12 +576,20 @@
         "examples": [
           {
             "id": 0,
-            "name": "string",
-            "isSecret": "string",
+            "isSecret": true,
             "isFolder": true,
+            "parentId": 0,
             "children": [
-              null
-            ]
+              {}
+            ],
+            "content": {
+              "id": 0,
+              "name": "string",
+              "body": "string",
+              "createdAt": "2019-08-24T14:15:22Z",
+              "updatedAt": "2019-08-24T14:15:22Z",
+              "deletedAt": "2019-08-24T14:15:22Z"
+            }
           }
         ]
       },
@@ -576,6 +628,16 @@
           "body",
           "createdAt",
           "updatedAt"
+        ],
+        "examples": [
+          {
+            "id": 0,
+            "name": "string",
+            "body": "string",
+            "createdAt": "2019-08-24T14:15:22Z",
+            "updatedAt": "2019-08-24T14:15:22Z",
+            "deletedAt": "2019-08-24T14:15:22Z"
+          }
         ]
       },
       "Folder": {
@@ -609,6 +671,15 @@
           "name",
           "createdAt",
           "updatedeAt"
+        ],
+        "examples": [
+          {
+            "id": 0,
+            "name": "string",
+            "createdAt": "2019-08-24T14:15:22Z",
+            "updatedeAt": "2019-08-24T14:15:22Z",
+            "deletedAt": "2019-08-24T14:15:22Z"
+          }
         ]
       }
     }
