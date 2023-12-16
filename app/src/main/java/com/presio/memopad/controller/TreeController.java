@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,26 +19,27 @@ public class TreeController {
   @Autowired
   private NodeService nodeService;
 
-  @GetMapping("/nodes")
-  public List<Node> getNodes() {
-    return nodeService.getAllNodes();
+  @GetMapping("/tree")
+  public ResponseEntity<List<Node>> getTree() {
+    List<Node> tree = nodeService.getTree();
+    return ResponseEntity.ok(tree);
   }
 
-  @PostMapping("/nodes")
+  @PostMapping("/tree")
   public ResponseEntity<Node> createNode(@RequestBody Node node) {
-    Node createdNode = nodeService.createNode(node);
-    return ResponseEntity.ok(createdNode);
+      Node createdNode = nodeService.createNode(node);
+      return ResponseEntity.ok(createdNode);
   }
 
-  @PutMapping("/nodes/{id}")
-  public ResponseEntity<Node> updateNode(@PathVariable Integer id, @RequestBody Node node) {
-    Node updatedNode = nodeService.updateNode(id, node);
-    return ResponseEntity.ok(updatedNode);
+  @PutMapping("/tree")
+  public ResponseEntity<Node> updateTree(@RequestBody List<Node> tree) {
+    Node updatedTree = nodeService.updateTree(tree);
+    return ResponseEntity.ok(updatedTree);
   }
 
-  @DeleteMapping("/nodes/{id}")
-  public ResponseEntity<Void> deleteNode(@PathVariable Integer id) {
-    nodeService.deleteNode(id);
+  @DeleteMapping("/tree")
+  public ResponseEntity<Void> deleteTree(@RequestBody List<Integer> ids) {
+    nodeService.deleteTree(ids);
     return ResponseEntity.noContent().build();
   }
 }
