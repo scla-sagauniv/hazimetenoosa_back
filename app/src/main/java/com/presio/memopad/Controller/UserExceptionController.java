@@ -9,8 +9,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.presio.memopad.Error.EmailIsAlreadyUsedException;
-import com.presio.memopad.Error.EmailIsNotExists;
-import com.presio.memopad.Error.UserPasswordIsIncorrect;
+import com.presio.memopad.Error.EmailIsNotExistsException;
+import com.presio.memopad.Error.UserPasswordIsIncorrectException;
 import com.presio.memopad.Response.ErrorMessageResponse;
 
 @RestControllerAdvice
@@ -27,8 +27,8 @@ public class UserExceptionController extends ResponseEntityExceptionHandler {
         request);
   }
 
-  @ExceptionHandler(EmailIsNotExists.class)
-  public ResponseEntity<Object> handleMyException(EmailIsNotExists exception, WebRequest request) {
+  @ExceptionHandler(EmailIsNotExistsException.class)
+  public ResponseEntity<Object> handleMyException(EmailIsNotExistsException exception, WebRequest request) {
     HttpHeaders headers = new HttpHeaders();
 
     return super.handleExceptionInternal(exception,
@@ -38,8 +38,8 @@ public class UserExceptionController extends ResponseEntityExceptionHandler {
         request);
   }
 
-  @ExceptionHandler(UserPasswordIsIncorrect.class)
-  public ResponseEntity<Object> handleMyException(UserPasswordIsIncorrect exception, WebRequest request) {
+  @ExceptionHandler(UserPasswordIsIncorrectException.class)
+  public ResponseEntity<Object> handleMyException(UserPasswordIsIncorrectException exception, WebRequest request) {
     HttpHeaders headers = new HttpHeaders();
 
     return super.handleExceptionInternal(exception,

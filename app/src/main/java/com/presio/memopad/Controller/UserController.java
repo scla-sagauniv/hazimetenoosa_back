@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.presio.memopad.Error.UserPasswordIsIncorrect;
+import com.presio.memopad.Error.UserPasswordIsIncorrectException;
 import com.presio.memopad.Model.User;
 import com.presio.memopad.Request.SignInRequest;
 import com.presio.memopad.Request.SignUpRequest;
@@ -47,7 +47,7 @@ public class UserController {
   public ResponseEntity<UserResponse> signIn(@RequestBody SignInRequest input) {
     User user = userService.getUserByEmail(input.getEmail());
     if (!user.getPassword().equals(input.getPassword())) {
-      throw new UserPasswordIsIncorrect(input.getPassword());
+      throw new UserPasswordIsIncorrectException(input.getPassword());
     }
     UserResponse res = new UserResponse(user);
     return ResponseEntity.ok(res);
