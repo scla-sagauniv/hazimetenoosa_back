@@ -1,0 +1,2 @@
+ALTER TABLE Users
+MODIFY auth_info TEXT;
