@@ -23,7 +23,7 @@ public class Node {
 
     @ManyToOne
     @JoinColumn(name = "parentId")
-    private Integer parentId;
+    private Node parent;
 
     private String childrenIds;
 
@@ -57,7 +57,7 @@ public class Node {
     }
 
     public void setParent(Node parent) {
-        this.parentId = parent.getId();
+        this.parent = parent;
     }
     
     public void addChild(Node child) {
@@ -65,6 +65,6 @@ public class Node {
             children = new ArrayList<>();
         }
         children.add(child);
-        child.setParentId(this.id);
+        child.setParent(this);
     }
 }
